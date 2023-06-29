@@ -49,6 +49,9 @@ function true_register_cpt() {
 	),
 		'public' => true,
 		'has_archive'   => true,
+		'show_ui' => true,
+		'show_in_menu'=>true, 
+		'supports'=> array('title', 'custom-fields'),
 		'menu_icon' => 'dashicons-format-aside'
 	);
 	register_post_type( 'al_stocks', $args );
@@ -58,16 +61,53 @@ function custom_fields(){
 	add_meta_box(
 		'stock_cf',
 		'Stock Details', // title
-		'CF',
+		'CF', //function
 		'al_stocks', //type
 		'normal',
 		'low'
 	);
 }
 function CF(){
-	echo 'custom field for stock';
+	?>
+	<style>
+		.price_stock{
+			background: aliceblue;
+			font-size: 2rem;
+			text-align: center;
+			color:black
+		}
+	</style>
+	
+	<div class="price_stock">
+	<?php  
+		global $post;
+		
+		if (get_post_custom( $post->ID )){
+			$custom = get_post_custom( $post->ID );
+			$stock_price = $custom[ "price" ][ 0 ];
+		} else {
+			$stock_price ='';
+		}
+		
+	?>
+		<p>Custom Field For Stock Price</p>	
+		<input type="num" name="price" value="<?php echo $stock_price; ?>">
+	</div>
+	<?php 
 }
-add_action('admin_init','custom_fields');
+add_action('admin_init','custom_fields'); 
+
+function save_post_meta_boxes($post_id){
+    global $post; 
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return;
+    } 
+	if (isset( $_POST['price'] ) ) {
+    	update_post_meta( $post->ID, "price", sanitize_text_field( $_POST[ "price" ] ) );
+	}
+}
+add_filter( 'save_post', 'save_post_meta_boxes' );
+
 
 
 add_action( 'template_include', 'stocks_template' );
