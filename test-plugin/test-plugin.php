@@ -53,7 +53,23 @@ function true_register_cpt() {
 	);
 	register_post_type( 'al_stocks', $args );
 }
- 
+  
+function custom_fields(){
+	add_meta_box(
+		'stock_cf',
+		'Stock Details', // title
+		'CF',
+		'al_stocks', //type
+		'normal',
+		'low'
+	);
+}
+function CF(){
+	echo 'custom field for stock';
+}
+add_action('admin_init','custom_fields');
+
+
 add_action( 'template_include', 'stocks_template' );
 function stocks_template( $template ) { 
 	global $post;  
