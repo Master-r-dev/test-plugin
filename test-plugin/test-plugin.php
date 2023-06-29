@@ -32,7 +32,7 @@ function true_register_cpt() {
 		'menu_name'                => 'Stocks', 
 		'name_admin_bar'           => 'Stocks',  
 		'view_items'               => 'View stocks',  
-		'attributes'               => 'Свойства авиабилета', 
+		'attributes'               => 'Stock property', 
   
 		'insert_into_item'         => 'Insert into stock',
 		'uploaded_to_this_item'    => 'Uploaded to this stock',
