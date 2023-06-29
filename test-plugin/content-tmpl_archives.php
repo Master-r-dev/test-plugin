@@ -10,7 +10,7 @@
    <div class="entry-content"> 
      <div style="clear: both; margin-bottom: 30px;"></div>
      <?php
-        $last__posts = intval(get_post_meta($post->ID, 'archived-posts-no', true));
+        $last__posts = intval(get_post_meta($post->ID, 'archived-posts-no', true)); 
         if($last__posts > 100 || $last__posts < 2) $last__posts = 5;
         $args = array(
             'post_type' => 'al_stocks',
@@ -24,12 +24,12 @@
         echo '<div class="archives-latest-section"><ol>';
         $counter = 1;
         while($my_query->have_posts() && $counter <= $last__posts) {
-            $my_query->the_post(); 
+            $my_query->the_post();  
             ?>
             <li><a href="<?php the_permalink() ?>"
               rel="bookmark"               
               title="Permanent Link to <?php the_title_attribute(); ?>">
-              <?php the_title(); ?></a>              
+              <?php the_title(); ?> | <?php if (get_post_meta(get_the_ID(), 'price', true)=='' )  echo 'price: none'; else echo 'price: '.get_post_meta(get_the_ID(), 'price', true) ;?></a>              
             </li>
             <?php
             $counter++;
