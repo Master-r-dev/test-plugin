@@ -29,7 +29,8 @@ get_header(); ?>
 				</header> 
 				
 				<div class="entry-content">
-					<?php the_content(); ?> 
+					<?php the_content(); echo '<br/>';?> 
+					<?php  if (get_post_meta(get_the_ID(), 'price', true)=='' )  echo 'price: none'; else echo 'price: '.get_post_meta(get_the_ID(), 'price', true) ; ?>
 					|
 					<a class="stock_option" data-t="<?php echo get_the_title($my_query->post->ID); ?>"></a>
 					<span id="loading" style="display:none">Loading...</span>
