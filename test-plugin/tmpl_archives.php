@@ -12,11 +12,7 @@ get_header(); ?>
  
   <div class="content-left-wrap col-md-9">
     <div id="primary" class="content-area">
-      <main id="main" class="site-main" role="main">
-	  <form>
-		<input type="text" size="30" onkeyup="showResult(this.value)">
-		<div id="livesearch"></div>
-	  </form>
+      <main id="main" class="site-main" role="main"> 
 	    <?php 
 		  	if ( file_exists(dirname(__FILE__) . '/content-tmpl_archives.php')  ) {        		      
 				include_once( dirname(__FILE__) . '/content-tmpl_archives.php' );				
@@ -24,7 +20,8 @@ get_header(); ?>
 				echo '<div >Missing archive template file!</div>';
 			} 
 		?>
- 
+ 		<input type="text" size="30" onkeyup="showResult(this.value)">
+		<div id="livesearch"></div> 
       </main>
     </div>
   </div>
